@@ -16,8 +16,7 @@ class Homescreencontroller with ChangeNotifier {
   String? userEmail;
 
   Future<void> getproducts({String? categroy}) async {
-    String endpointUrl= categroy == null ? "products" : "products/category/$categroy";
-    final url = Uri.parse(AppConfi.baseUrl + endpointUrl);
+    final url = Uri.parse(AppConfi.baseUrl);
     try {
       isProductLoading = true;
       notifyListeners();
