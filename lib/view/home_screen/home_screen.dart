@@ -13,29 +13,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String? userName;
-  String? userEmail;
-  bool isLoading = true;
+ 
 
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       context.read<Homescreencontroller>().getproducts();
+      context.read<Homescreencontroller>().loadUserData();
     },);
     super.initState();
-    _loadUserData();
   }
 
-  Future<void> _loadUserData() async {
-    final name = await AuthHandler.getUserName();
-    final email = await AuthHandler.getUserEmail();
-    
-    setState(() {
-      userName = name;
-      userEmail = email;
-      isLoading = false;
-    });
-  }
+  
 
   Future<void> _handleLogout() async {
     await AuthHandler.logout();
@@ -62,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: isLoading ? Center(child: CircularProgressIndicator(),) : Padding(
+      body: homescreenstate.isUserLoading ? Center(child: CircularProgressIndicator(),) : Padding(
               padding: const EdgeInsets.all(20.0),
               child: SingleChildScrollView(
                 child: Padding(
@@ -106,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      userName ?? 'N/A',
+                                      homescreenstate.userName ?? 'N/A',
                                       style: const TextStyle(fontSize: 16),
                                     ),
                                   ),
@@ -126,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      userEmail ?? 'N/A',
+                                      homescreenstate.userEmail ?? 'N/A',
                                       style: const TextStyle(fontSize: 16),
                                     ),
                                   ),

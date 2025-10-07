@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:interviewtask03/model/productmodel.dart';
 import 'package:interviewtask03/service/api.dart';
+import 'package:interviewtask03/service/authhandel.dart';
 
 
 class Homescreencontroller with ChangeNotifier {
@@ -10,7 +11,9 @@ class Homescreencontroller with ChangeNotifier {
   bool isProductLoading = false;
   int selectedindex = 0;
   List<ProductModel> product=[];
-  
+  bool isUserLoading = true;
+  String? userName;
+  String? userEmail;
 
   Future<void> getproducts({String? categroy}) async {
     String endpointUrl= categroy == null ? "products" : "products/category/$categroy";
@@ -27,5 +30,15 @@ class Homescreencontroller with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> loadUserData() async {
+    isUserLoading = true;
+    notifyListeners();
+    
+    userName = await AuthHandler.getUserName();
+    userEmail = await AuthHandler.getUserEmail();
+    
+    isUserLoading = false;
+    notifyListeners();
+  }
  
 }
