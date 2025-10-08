@@ -14,7 +14,7 @@ class Homescreencontroller with ChangeNotifier {
   String? userName;
   String? userEmail;
 
-  Future<void> getproducts({String? categroy}) async {
+  Future<void> getproducts() async {
     final url = Uri.parse(AppConfi.baseUrl);
     try {
       isProductLoading = true;

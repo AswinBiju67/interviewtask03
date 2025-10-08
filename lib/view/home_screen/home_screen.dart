@@ -104,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               const SizedBox(height: 15),
                               Row(
                                 children: [
-                                  const Icon(Icons.email, color: Colors.green),
+                                  const Icon(Icons.email, color: Colors.grey),
                                   const SizedBox(width: 10),
                                   const Text(
                                     'Email: ',
@@ -125,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 30),
+                    const SizedBox(height: 30),
                      GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2 ,mainAxisSpacing: 15,crossAxisSpacing: 20, mainAxisExtent: 250), itemBuilder: (context, index) {
                       final homescreenstate=context.watch<Homescreencontroller>();
                        return homescreenstate.isLoading ? Center(child: CircularProgressIndicator(),) : Card(
